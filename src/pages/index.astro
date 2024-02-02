@@ -16,7 +16,9 @@ const projects = await getCollection("project");
 ---
 
 <RootLayout>
-  <main class="flex justify-center px-6 pb-24 pt-8 sm:pb-28 sm:pt-32">
+  <main
+    class="flex justify-center px-6 pb-24 pt-8 print:py-0 sm:pb-28 sm:pt-32"
+  >
     <article class="max-w-3xl w-full grow">
       <DataList>
         <DataListHeader>
