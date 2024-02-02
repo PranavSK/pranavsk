@@ -1,0 +1,155 @@
+---
+import { getCollection } from "astro:content";
+import RootLayout from "@/layouts/root.astro";
+import {
+  DataList,
+  DataListContent,
+  DataListHeader,
+} from "@/components/ui/data-list";
+import { iconMap } from "@/lib/icon-map";
+import { cx } from "@/lib/utils";
+
+const works = (await getCollection("work")).sort((a, b) =>
+  a.data.start > b.data.start ? -1 : 1,
+);
+const projects = await getCollection("project");
+---
+
+<RootLayout>
+  <main class="flex justify-center px-6 pb-24 pt-8 sm:pb-28 sm:pt-32">
+    <article class="max-w-3xl w-full grow">
+      <DataList>
+        <DataListHeader>
+          <h1 class="text-lg text-accent">Pranav Sridhar Koundinya</h1>
+          <h2 class="text-muted">Software Developer</h2>
+          <p class="text-xs text-muted">pranavpg101@gmail.com</p>
+        </DataListHeader>
+        <DataListContent className="space-y-2">
+          <p>
+            Dedicated and innovative Lead Software Developer with a strong
+            background in interactive content development and software
+            engineering.
+          </p>
+          <p>
+            Proven track record of leading teams to success through effective
+            restructuring, technology adoption, and process optimization.
+          </p>
+          <p>
+            Seeking opportunities to apply my technical skills and leadership
+            abilities to drive impactful projects.
+          </p>
+        </DataListContent>
+      </DataList>
+      <DataList>
+        {
+          works.map(
+            ({
+              data: {
+                start,
+                end,
+                organization,
+                organizationUrl,
+                role,
+                team,
+                location,
+              },
+            }) => (
+              <>
+                <DataListHeader>
+                  <h3 class="flex items-center gap-2 text-muted">
+                    {start.getFullYear()}
+                    {end === "current" && <span class="badge">Current</span>}
+                  </h3>
+                </DataListHeader>
+                <DataListContent>
+                  <div>{team ? `${role}, ${team}` : role}</div>
+                  <div>
+                    {organizationUrl ? (
+                      <a
+                        class="group/link animated-underline"
+                        href={organizationUrl}
+                      >
+                        {organization}
+                        <span class="i-solar:arrow-right-up-line-duotone group-hover/link:i-solar:arrow-right-up-linear size-4" />
+                      </a>
+                    ) : (
+                      organization
+                    )}
+                  </div>
+                  <div class="text-muted">{location}</div>
+                </DataListContent>
+              </>
+            ),
+          )
+        }
+      </DataList>
+      <DataList>
+        <DataListHeader>
+          <h3 class="text-muted">Recent projects</h3>
+        </DataListHeader>
+        <DataListContent className="space-y-4">
+          {
+            projects.map(
+              ({ data: { title, description, url, repo, skills } }) => (
+                <div>
+                  <h4>
+                    {url ? (
+                      <a class="group/link animated-underline" href={url}>
+                        {title}
+                        <span class="i-solar:arrow-right-up-line-duotone group-hover/link:i-solar:arrow-right-up-linear size-4" />
+                      </a>
+                    ) : (
+                      title
+                    )}
+                    {repo && (
+                      <a class="animated-underline" href={repo}>
+                        <span
+                          class="size-4"
+                          class:list={{
+                            "i-tabler:brand-github": repo.includes("github"),
+                            "i-tabler:brand-gitlab": repo.includes("gitlab"),
+                          }}
+                        />
+                      </a>
+                    )}
+                  </h4>
+                  <p class="text-muted">{description}</p>
+                  {skills && (
+                    <ul class="flex flex-wrap gap-2">
+                      {skills.map((skill) => (
+                        <li class={cx("size-6", iconMap[skill])} />
+                      ))}
+                    </ul>
+                  )}
+                </div>
+              ),
+            )
+          }
+        </DataListContent>
+      </DataList>
+      <DataList>
+        <DataListHeader>
+          <h3 class="text-muted">Socials</h3>
+        </DataListHeader>
+        <DataListContent>
+          <div class="flex gap-2">
+            <a
+              class="animated-underline"
+              href="https://github.com/PranavSK"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <div class="i-devicon:github-wordmark size-6"></div>
+            </a>
+            <a
+              class="animated-underline"
+              href="mailto:pranavpg101@gmail.com?subject=Lets connect"
+            >
+              <div class="i-logos:google-gmail size-6"></div>
+            </a>
+          </div>
+        </DataListContent>
+      </DataList>
+    </article>
+  </main>
+</RootLayout>

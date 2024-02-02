@@ -1,0 +1,108 @@
+---
+/// <reference types="view-transitions-api-types" />
+import "@fontsource/varela-round";
+import "@fontsource/mononoki";
+import { cx } from "@/lib/utils";
+
+interface Props {
+  class?: string;
+  description?: string;
+  title?: string;
+}
+
+const {
+  class: className,
+  description = "Personal website of Pranav S K",
+  title = "pranavsk",
+} = Astro.props;
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link href="/favicon.svg" rel="icon" type="image/svg+xml" />
+    <meta content="width=device-width" name="viewport" />
+    <meta content={Astro.generator} name="generator" />
+    <meta content={description} name="description" />
+    <title>{title}</title>
+    <style is:inline>
+      ::view-transition-old(root),
+      ::view-transition-new(root) {
+        animation: none;
+        mix-blend-mode: normal;
+      }
+    </style>
+  </head>
+  <body class={cx("base", className)}>
+    <script is:inline>
+      function getInitialTheme() {
+        const persistedTheme = localStorage.getItem('theme');
+        const hasPersistedPreference = typeof persistedTheme === 'string';
+        if (hasPersistedPreference) return persistedTheme;
+        const mql = window.matchMedia('(prefers-color-scheme: dark)');
+        const hasMediaQueryPreference = typeof mql.matches === 'boolean';
+        if (hasMediaQueryPreference) {
+          return mql.matches ? 'dark' : 'light';
+        }
+        return 'light';
+      }
+      document.documentElement.classList.toggle('dark', getInitialTheme() === 'dark'      );
+    </script>
+    <slot />
+    <button
+      id="theme-toggle"
+      aria-label="Toggle Dark Mode"
+      class="i-solar:sun-2-bold-duotone dark:i-solar:moon-stars-bold-duotone fixed right-6 top-6 size-4 print:hidden"
+    ></button>
+    <script>
+      const toggle = document.querySelector("#theme-toggle");
+      const toggleTheme = document.startViewTransition
+        ? async () => {
+            await document.startViewTransition!(async () => {
+              document.documentElement.classList.toggle("dark");
+              localStorage.setItem(
+                "theme",
+                document.documentElement.classList.contains("dark")
+                  ? "dark"
+                  : "light",
+              );
+            }).ready;
+
+            const { top, left, width, height } =
+              toggle!.getBoundingClientRect();
+            const x = left + width / 2;
+            const y = top + height / 2;
+            const right = window.innerWidth - left;
+            const bottom = window.innerHeight - top;
+            const maxRadius = Math.hypot(
+              Math.max(left, right),
+              Math.max(top, bottom),
+            );
+
+            document.documentElement.animate(
+              {
+                clipPath: [
+                  `circle(0px at ${x}px ${y}px)`,
+                  `circle(${maxRadius}px at ${x}px ${y}px)`,
+                ],
+              },
+              {
+                duration: 1000,
+                easing: "ease-in-out",
+                pseudoElement: "::view-transition-new(root)",
+              },
+            );
+          }
+        : () => {
+            document.documentElement.classList.toggle("dark");
+            localStorage.setItem(
+              "theme",
+              document.documentElement.classList.contains("dark")
+                ? "dark"
+                : "light",
+            );
+          };
+      toggle?.addEventListener("click", toggleTheme);
+    </script>
+  </body>
+</html>

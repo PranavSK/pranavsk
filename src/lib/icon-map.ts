@@ -1,0 +1,27 @@
+export const iconMap: { none?: undefined } & Record<string, string> = {
+  react: 'i-devicon:react-wordmark',
+  nodejs: 'i-devicon:nodejs-plain',
+  astro: 'i-devicon:astro-wordmark',
+  nextjs: 'i-devicon:nextjs-wordmark',
+  typescript: 'i-devicon:typescript',
+  javascript: 'i-devicon:javascript',
+  godot: 'i-devicon:godot-wordmark',
+  unity: 'i-devicon:unity-wordmark',
+  vitejs: 'i-devicon:vitejs',
+  github: 'i-devicon:github-wordmark',
+  githubactions: 'i-devicon:githubactions',
+  git: 'i-devicon:git-wordmark',
+  npm: 'i-devicon:npm-wordmark',
+  storybook: 'i-devicon:storybook-wordmark',
+  redux: 'i-devicon:redux',
+  solidjs: 'i-devicon:solidjs',
+  netlify: 'i-devicon:netlify-wordmark',
+  aws: 'i-devicon:amazonwebservices-wordmark',
+  markdown: 'i-devicon:markdown',
+  tailwindcss: 'i-devicon:tailwindcss',
+  blender: 'i-devicon:blender',
+  svelte: 'i-devicon:svelte-wordmark',
+  vuejs: 'i-devicon:vuejs-plain',
+  python: 'i-devicon:python-wordmark'
+} as const;
+export const iconTypes = ['none', ...Object.keys(iconMap)] as const;
