@@ -1,13 +1,11 @@
 ---
 import { getCollection } from "astro:content";
 import RootLayout from "@/layouts/root.astro";
-import {
-  DataList,
-  DataListContent,
-  DataListHeader,
-} from "@/components/ui/data-list";
+import DataList from "@/components/data-list/root.astro";
+import DataListContent from "@/components/data-list/content.astro";
+import DataListHeader from "@/components/data-list/header.astro";
+
 import { iconMap } from "@/lib/icon-map";
-import { cx } from "@/lib/utils";
 
 const works = (await getCollection("work")).sort((a, b) =>
   a.data.start > b.data.start ? -1 : 1,
@@ -26,7 +24,7 @@ const projects = await getCollection("project");
           <h2 class="text-muted">Software Developer</h2>
           <p class="text-xs text-muted">pranavpg101@gmail.com</p>
         </DataListHeader>
-        <DataListContent className="space-y-2">
+        <DataListContent class="space-y-2">
           <p>
             Dedicated and innovative Lead Software Developer with a strong
             background in interactive content development and software
@@ -89,7 +87,7 @@ const projects = await getCollection("project");
         <DataListHeader>
           <h3 class="text-muted">Recent projects</h3>
         </DataListHeader>
-        <DataListContent className="space-y-4">
+        <DataListContent class="space-y-4">
           {
             projects.map(
               ({ data: { title, description, url, repo, skills } }) => (
@@ -119,7 +117,7 @@ const projects = await getCollection("project");
                   {skills && (
                     <ul class="flex flex-wrap gap-2">
                       {skills.map((skill) => (
-                        <li class={cx("size-6", iconMap[skill])} />
+                        <li class={`text-2xl ${iconMap[skill]}`} />
                       ))}
                     </ul>
                   )}
@@ -155,3 +153,4 @@ const projects = await getCollection("project");
     </article>
   </main>
 </RootLayout>
+@/components/data-list

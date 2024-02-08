@@ -1,5 +1,6 @@
 import { defineCollection, z } from 'astro:content';
-import { iconTypes } from '@/lib/icon-map';
+import { iconMap } from '@/lib/icon-map';
+import { zodEnumFromObjKeys } from '@/lib/utils';
 
 const work = defineCollection({
   type: 'data',
@@ -20,7 +21,7 @@ const project = defineCollection({
     description: z.string(),
     url: z.string().url().optional(),
     repo: z.string().url().optional(),
-    skills: z.array(z.enum(iconTypes)).optional()
+    skills: z.array(zodEnumFromObjKeys(iconMap)).optional()
   })
 });
 

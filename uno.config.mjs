@@ -1,6 +1,5 @@
 import { defineConfig, presetIcons, presetUno, transformerVariantGroup } from 'unocss';
 import { gold, goldDark, sand, sandDark } from '@radix-ui/colors';
-import { iconMap } from './src/lib/icon-map';
 
 const themeKeys = [
   'base',
@@ -37,6 +36,11 @@ function extractRadixColors(color) {
 const defaultSans = presetUno().theme?.fontFamily?.sans ?? '';
 const defaultMono = presetUno().theme?.fontFamily?.mono ?? '';
 export default defineConfig({
+  content: {
+    pipeline: {
+      include: [/\.(vue|svelte|[jt]sx|mdx?|astro|elm|php|phtml|html)($|\?)/, 'src/lib/icon-map.ts']
+    }
+  },
   extendTheme: [
     theme => ({
       ...theme,
@@ -65,19 +69,14 @@ export default defineConfig({
   },
   shortcuts: [
     {
-      base: 'bg-primary-base border-primary-border text-primary-text dark:(bg-primaryDark-base border-primaryDark-border text-primaryDark-text)'
-    },
-    { 'text-accent': 'text-accent-solid dark:text-accentDark-solid' },
-    { 'text-muted': 'text-primary-textSubtle dark:text-primaryDark-textSubtle' },
-    {
+      base: 'bg-primary-base border-primary-border text-primary-text dark:(bg-primaryDark-base border-primaryDark-border text-primaryDark-text)',
+      'text-accent': 'text-accent-solid dark:text-accentDark-solid',
+      'text-muted': 'text-primary-textSubtle dark:text-primaryDark-textSubtle',
       badge:
-        'inline-flex items-center gap-1 rounded-xl text-xs py-0.5 px-1.5 bg-primary-bg dark:bg-primaryDark-bg text-primary-textSubtle dark:text-primaryDark-textSubtle'
-    },
-    {
+        'inline-flex items-center gap-1 rounded-xl text-xs py-0.5 px-1.5 bg-primary-bg dark:bg-primaryDark-bg text-primary-textSubtle dark:text-primaryDark-textSubtle',
       'animated-underline':
         'relative before:(content-[""] absolute block w-full h-1px -bottom-4px left-0 scale-0 bg-primary-line transform-origin-top-left transition-transform-300 dark:bg-primaryDark-line hover:scale-100)'
     }
   ],
-  safelist: Object.values(iconMap),
   transformers: [transformerVariantGroup()]
 });

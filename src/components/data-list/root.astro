@@ -1,0 +1,16 @@
+---
+import type { HTMLAttributes } from "astro/types";
+import { cx } from "@/lib/utils";
+interface Props extends HTMLAttributes<"dl"> {}
+const { class: className, ...props } = Astro.props;
+---
+
+<dl
+  class={cx(
+    "group mb-12 grid grid-cols-3 gap-8 gap-y-2 sm:(mb-16 gap-y-4)",
+    className,
+  )}
+  {...props}
+>
+  <slot />
+</dl>
