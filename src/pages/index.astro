@@ -90,17 +90,18 @@ const projects = await getCollection("project");
         <DataListContent class="space-y-4">
           {
             projects.map(
-              ({ data: { title, description, url, repo, skills } }) => (
+              ({ slug, data: { title, description, repo, skills } }) => (
                 <div>
                   <h4>
-                    {url ? (
-                      <a class="group/link animated-underline" href={url}>
-                        {title}
-                        <span class="i-solar:arrow-right-up-line-duotone group-hover/link:i-solar:arrow-right-up-linear size-4" />
-                      </a>
-                    ) : (
-                      title
-                    )}
+                    <a
+                      class="group/link animated-underline"
+                      href={`/project/${slug}`}
+                      transition:name={`title-${slug}`}
+                    >
+                      {title}
+                      <span class="i-solar:arrow-right-up-line-duotone group-hover/link:i-solar:arrow-right-up-linear size-4" />
+                    </a>
+
                     {repo && (
                       <a class="animated-underline" href={repo}>
                         <span

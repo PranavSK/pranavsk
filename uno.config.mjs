@@ -1,4 +1,4 @@
-import { defineConfig, presetIcons, presetUno, transformerVariantGroup } from 'unocss';
+import { defineConfig, presetIcons, presetTypography, presetUno, transformerVariantGroup } from 'unocss';
 import { gold, goldDark, sand, sandDark } from '@radix-ui/colors';
 
 const themeKeys = [
@@ -57,7 +57,8 @@ export default defineConfig({
         display: 'inline-block',
         'vertical-align': 'middle'
       }
-    })
+    }),
+    presetTypography()
   ],
   theme: {
     colors: {

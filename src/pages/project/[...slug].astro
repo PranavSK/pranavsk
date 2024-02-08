@@ -1,0 +1,30 @@
+---
+import type { GetStaticPaths } from "astro";
+import { getCollection } from "astro:content";
+import RootLayout from "@/layouts/root.astro";
+
+export const getStaticPaths = (async () => {
+  const entries = await getCollection("project");
+  return entries.map((entry) => ({
+    params: {
+      slug: entry.slug,
+    },
+    props: { entry },
+  }));
+}) satisfies GetStaticPaths;
+const { slug } = Astro.params;
+const {
+  entry: {
+    data: { title, description },
+    render,
+  },
+} = Astro.props;
+const { Content } = await render();
+---
+
+<RootLayout title={title} description={description}>
+  <article class="prose xl:text-xl dark:prose-invert">
+    <h1 transition:name=`title-${slug}`>{title}</h1>
+    <Content />
+  </article>
+</RootLayout>

@@ -2,6 +2,7 @@
 /// <reference types="view-transitions-api-types" />
 import "@fontsource/varela-round";
 import "@fontsource/mononoki";
+import { ViewTransitions } from "astro:transitions";
 import { cx } from "@/lib/utils";
 
 interface Props {
@@ -25,6 +26,7 @@ const {
     <meta content={Astro.generator} name="generator" />
     <meta content={description} name="description" />
     <title>{title}</title>
+    <ViewTransitions />
     <style is:inline>
       ::view-transition-old(root),
       ::view-transition-new(root) {

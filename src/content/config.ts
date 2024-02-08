@@ -19,7 +19,6 @@ const project = defineCollection({
   schema: z.object({
     title: z.string(),
     description: z.string(),
-    url: z.string().url().optional(),
     repo: z.string().url().optional(),
     skills: z.array(zodEnumFromObjKeys(iconMap)).optional()
   })
