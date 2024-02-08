@@ -76,7 +76,8 @@ export default defineConfig({
       badge:
         'inline-flex items-center gap-1 rounded-xl text-xs py-0.5 px-1.5 bg-primary-bg dark:bg-primaryDark-bg text-primary-textSubtle dark:text-primaryDark-textSubtle',
       'animated-underline':
-        'relative before:(content-[""] absolute block w-full h-1px -bottom-4px left-0 scale-0 bg-primary-line transform-origin-top-left transition-transform-300 dark:bg-primaryDark-line hover:scale-100)'
+        'relative before:(content-[""] absolute block w-full h-1px -bottom-4px left-0 scale-0 bg-primary-line transform-origin-top-left transition-transform-300 dark:bg-primaryDark-line hover:scale-100)',
+      tooltip: 'bg-primary-bgSubtle dark:bg-primaryDark-bgSubtle text-primary-text dark:text-primaryDark-text'
     }
   ],
   transformers: [transformerVariantGroup()]
