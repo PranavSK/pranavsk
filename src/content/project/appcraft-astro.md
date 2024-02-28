@@ -15,7 +15,7 @@ Find a usage demo of AppCraft Astro [here](https://appcraft.netlify.app/).
 
 ## Screenshots
 
-![Slides List](./assets/appcraft-astro-allslides.jpeg)
+![Slides List](./assets/appcraft-astro-slide-all.jpeg)
 
 ![Slide Editor](./assets/appcraft-astro-slide-editor.png)
 
