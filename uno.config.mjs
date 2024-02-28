@@ -1,5 +1,6 @@
 import { defineConfig, presetIcons, presetTypography, presetUno, transformerVariantGroup } from 'unocss';
 import { gold, goldDark, sand, sandDark } from '@radix-ui/colors';
+import { presetHeroPatterns } from '@julr/unocss-preset-heropatterns';
 
 const themeKeys = [
   'base',
@@ -58,7 +59,8 @@ export default defineConfig({
         'vertical-align': 'middle'
       }
     }),
-    presetTypography()
+    presetTypography(),
+    presetHeroPatterns()
   ],
   theme: {
     colors: {

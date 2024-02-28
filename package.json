@@ -33,6 +33,7 @@
     "@iconify-json/skill-icons": "^1.1.7",
     "@iconify-json/solar": "^1.1.9",
     "@iconify-json/tabler": "^1.1.105",
+    "@julr/unocss-preset-heropatterns": "^1.0.2",
     "@pranavsk/eslint-config": "^1.2.3",
     "@radix-ui/colors": "^3.0.0",
     "@typescript-eslint/eslint-plugin": "^6.20.0",

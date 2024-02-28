@@ -23,8 +23,21 @@ const { Content } = await render();
 ---
 
 <RootLayout title={title} description={description}>
-  <article class="prose xl:text-xl dark:prose-invert">
-    <h1 transition:name=`title-${slug}`>{title}</h1>
+  <div
+    class="h-xs w-screen bg-cover bg-center bg-no-repeat bg-hero-circuit-board-accent-line dark:bg-hero-circuit-board-accentDark-line"
+  >
+  </div>
+  <div
+    class="sticky top-0 w-full flex items-center justify-between border-y border-accent-border py-2 pl-6 pr-16 backdrop-blur-sm backdrop-filter dark:border-accentDark-border"
+  >
+    <a href="/" class="text-accent-text dark:text-accentDark-text">
+      <span class="i-solar-home-bold-duotone size-6"></span>
+    </a>
+    <h1 transition:name=`title-${slug}` class="text-4xl">
+      {title}
+    </h1>
+  </div>
+  <article class="mx-auto prose xl:text-xl dark:prose-invert">
     <Content />
   </article>
 </RootLayout>
