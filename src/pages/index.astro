@@ -1,5 +1,5 @@
 ---
-import { getCollection } from "astro:content";
+import { getCollection, getDataEntryById } from "astro:content";
 import RootLayout from "@/layouts/root.astro";
 import DataList from "@/components/data-list/root.astro";
 import DataListContent from "@/components/data-list/content.astro";
@@ -10,6 +10,7 @@ const works = (await getCollection("work")).sort((a, b) =>
   a.data.start > b.data.start ? -1 : 1,
 );
 const projects = await getCollection("project");
+const info = await getDataEntryById("info", "me");
 ---
 
 <RootLayout>
@@ -19,24 +20,14 @@ const projects = await getCollection("project");
     <article class="max-w-3xl w-full grow">
       <DataList>
         <DataListHeader>
-          <h1 class="text-lg text-accent">Pranav Sridhar Koundinya</h1>
-          <h2 class="text-muted">Software Developer</h2>
-          <p class="text-xs text-muted">pranavpg101@gmail.com</p>
+          <h1 class="text-lg text-accent">
+            {`${info.data.firstName} ${info.data.lastName}`}
+          </h1>
+          <h2 class="text-muted">{info.data.title}</h2>
+          <p class="text-xs text-muted">{info.data.email}</p>
         </DataListHeader>
         <DataListContent class="space-y-2">
-          <p>
-            Dedicated and innovative Lead Software Developer with a strong
-            background in interactive content development and software
-            engineering.
-          </p>
-          <p>
-            Proven track record of leading teams to success through effective
-            restructuring, technology adoption, and process optimization.
-          </p>
-          <p>
-            Seeking opportunities to apply my technical skills and leadership
-            abilities to drive impactful projects.
-          </p>
+          {info.data.aboutDetailed.map((str) => <p>{str}</p>)}
         </DataListContent>
       </DataList>
       <DataList>
@@ -131,17 +122,24 @@ const projects = await getCollection("project");
           <div class="flex gap-2">
             <a
               class="animated-underline"
-              href="https://github.com/PranavSK"
+              href={`https://github.com/${info.data.github}`}
               target="_blank"
               rel="noopener noreferrer"
             >
-              <div class="i-devicon:github-wordmark size-6"></div>
+              <div class="i-tabler:brand-github size-6"></div>
             </a>
             <a
               class="animated-underline"
-              href="mailto:pranavpg101@gmail.com?subject=Lets connect"
+              href={`mailto:${info.data.email}}?subject=Lets connect`}
             >
               <div class="i-logos:google-gmail size-6"></div>
+            </a>
+            <a
+              class="animated-underline"
+              href="/psk-resume.pdf"
+              target="_blank"
+            >
+              <div class="i-tabler:file-cv size-6"></div>
             </a>
           </div>
         </DataListContent>

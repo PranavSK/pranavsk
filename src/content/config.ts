@@ -2,6 +2,22 @@ import { defineCollection, z } from 'astro:content';
 import { iconMap } from '@/lib/icon-map';
 import { zodEnumFromObjKeys } from '@/lib/utils';
 
+const info = defineCollection({
+  type: 'data',
+  schema: z.object({
+    firstName: z.string(),
+    lastName: z.string(),
+    title: z.string(),
+    email: z.string().email(),
+    phone: z.string(),
+    location: z.string(),
+    website: z.string().url(),
+    github: z.string(),
+    linkedin: z.string(),
+    about: z.string(),
+    aboutDetailed: z.array(z.string())
+  })
+});
 const work = defineCollection({
   type: 'data',
   schema: z.object({
@@ -11,7 +27,8 @@ const work = defineCollection({
     team: z.string().optional(),
     organization: z.string(),
     organizationUrl: z.string().url().optional(),
-    location: z.string()
+    location: z.string(),
+    description: z.array(z.string())
   })
 });
 const project = defineCollection({
@@ -24,4 +41,4 @@ const project = defineCollection({
   })
 });
 
-export const collections = { work, project };
+export const collections = { info, work, project };

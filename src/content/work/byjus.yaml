@@ -2,6 +2,11 @@ start: 2021-10
 end: current
 role: Lead Software Developer
 team: Activity Studio
-organization: Byju's
+organization: Think & Learn Pvt. Ltd. - BYJU'S
 organizationUrl: https://byjus.com/
 location: Bengaluru, India
+description:
+  - Built a ui library and framework on top of Cocos Creater, nodejs, and vuejs to quickly build mini games.
+  - Created a number of proof of concept web application for a number of product ideas, such as interactive videos, a drawing canvas for community posts, 3d character puppet as teacher assistant etc.
+  - Built the AppCraft platform - a low code tool to simplify web applet creation.
+  - Lead a team of talented developers in building a huge collection of web games that are used as a part of Byjus's live classes.
