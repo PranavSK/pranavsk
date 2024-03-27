@@ -27,7 +27,7 @@ const education = defineCollection({
     schoolUrl: z.string().url().optional(),
     location: z.string(),
     start: z.coerce.date(),
-    end: z.coerce.date().optional()
+    end: z.coerce.date()
   })
 });
 const work = defineCollection({
