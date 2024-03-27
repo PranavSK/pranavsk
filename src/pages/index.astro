@@ -11,6 +11,7 @@ const works = (await getCollection("work")).sort((a, b) =>
 );
 const projects = await getCollection("project");
 const info = await getDataEntryById("info", "me");
+const education = await getCollection("education");
 ---
 
 <RootLayout>
@@ -58,6 +59,7 @@ const info = await getDataEntryById("info", "me");
                       <a
                         class="group/link animated-underline"
                         href={organizationUrl}
+                        target="_blank"
                       >
                         {organization}
                         <span class="i-solar:arrow-right-up-line-duotone group-hover/link:i-solar:arrow-right-up-linear size-4" />
@@ -113,6 +115,43 @@ const info = await getDataEntryById("info", "me");
             )
           }
         </DataListContent>
+      </DataList>
+      <DataList>
+        {
+          education.map(
+            ({
+              data: { start, end, degree, major, school, schoolUrl, location },
+            }) => (
+              <>
+                <DataListHeader>
+                  <h3 class="items center flex gap-2 text-muted">
+                    {start.getFullYear()} - {end.getFullYear()}
+                  </h3>
+                </DataListHeader>
+                <DataListContent>
+                  <div>
+                    {degree} in {major}
+                  </div>
+                  <div>
+                    {schoolUrl ? (
+                      <a
+                        class="group/link animated-underline"
+                        href={schoolUrl}
+                        target="_blank"
+                      >
+                        {school}
+                        <span class="i-solar:arrow-right-up-line-duotone group-hover/link:i-solar:arrow-right-up-linear size-4" />
+                      </a>
+                    ) : (
+                      school
+                    )}
+                  </div>
+                  <div class="text-muted">{location}</div>
+                </DataListContent>
+              </>
+            ),
+          )
+        }
       </DataList>
       <DataList>
         <DataListHeader>

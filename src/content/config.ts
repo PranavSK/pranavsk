@@ -18,6 +18,18 @@ const info = defineCollection({
     aboutDetailed: z.array(z.string())
   })
 });
+const education = defineCollection({
+  type: 'data',
+  schema: z.object({
+    degree: z.string(),
+    major: z.string(),
+    school: z.string(),
+    schoolUrl: z.string().url().optional(),
+    location: z.string(),
+    start: z.coerce.date(),
+    end: z.coerce.date().optional()
+  })
+});
 const work = defineCollection({
   type: 'data',
   schema: z.object({
@@ -41,4 +53,4 @@ const project = defineCollection({
   })
 });
 
-export const collections = { info, work, project };
+export const collections = { info, education, work, project };

@@ -70,6 +70,23 @@
   return months.at(month) + " " + parts.at(0)
 }
 
+#let edu_item(data) = {
+  set block(above: 0.7em, below: 1em)
+  pad(left: 1em, right: 0.5em, box[
+    #grid(
+      columns: (3fr, 1fr),
+      align(left)[
+        *#data.degree*, _#data.major _\
+          _#data.school _
+      ],
+      align(right)[
+        *#format_date(data.start)* _to_ *#format_date(data.end)*\
+          _#data.location _
+      ]
+    )
+    ])
+}
+
 #let work_item(data) = {
   set block(above: 0.7em, below: 1em)
   pad(left: 1em, right: 0.5em, box[
@@ -80,8 +97,8 @@
           _#if "team" in data [#data.team, ]#data.organization _
       ], 
       align(right)[
-        *#format_date(data.start)* _to _ *#format_date(data.end)* \
-        _#data.location _
+        *#format_date(data.start)* _to_ *#format_date(data.end)*\
+          _#data.location _
       ]
     )
     #list(..data.description)
@@ -107,6 +124,9 @@
 
 #section_header("Summary")
 #summary(info.aboutDetailed)
+
+#section_header("Education")
+#edu_item(yaml("../src/content/education/rvce.yaml"))
 
 #section_header("Work Experience")
 #work_item(yaml("../src/content/work/byjus.yaml"))
